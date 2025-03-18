@@ -19,6 +19,7 @@ interface WorkflowState {
   history: { nodes: any[], edges: any[] }[];
   historyIndex: number;
   workflowResults: Record<string, any>;
+  loadAPIKeys: () => Promise<void>;
   apiKeys: {
     openai: string | null;
     claude: string | null;
@@ -176,7 +177,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
       // First check if there's an existing key record
       const response = await databases.listDocuments(
         "67b4eba50033539bd242",
-        "api_keys_collection", // You'll need to create this collection
+        "67d9c7b7001a7a22639c", // new api collection
         [Query.equal("userId", user.id)]
       );
 
@@ -187,7 +188,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
         // Update existing key record
         await databases.updateDocument(
           "67b4eba50033539bd242",
-          "api_keys_collection",
+          "67d9c7b7001a7a22639c",
           response.documents[0].$id,
           { [provider]: key, lastUpdated: new Date().toISOString() }
         );
@@ -195,7 +196,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
         // Create a new key record
         await databases.createDocument(
           "67b4eba50033539bd242",
-          "api_keys_collection",
+          "67d9c7b7001a7a22639c",
           ID.unique(),
           { 
             userId: user.id, 
@@ -223,7 +224,7 @@ export const useWorkflowStore = create<WorkflowState>((set, get) => ({
     try {
       const response = await databases.listDocuments(
         "67b4eba50033539bd242",
-        "api_keys_collection", // You'll need to create this collection
+        "67d9c7b7001a7a22639c", // You'll need to create this collection
         [Query.equal("userId", user.id)]
       );
 

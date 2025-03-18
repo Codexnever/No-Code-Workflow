@@ -18,7 +18,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import AITaskNode from "../components/nodes/AITaskNode";
 import ConditionalEdge from "../components/ConditionalEdge";
-import AiNode from "./nodes/AiNode";
+// import AiNode from "./nodes/AiNode";
 import { useWorkflowStore } from "../store/workflowStore";
 import { Undo2, Redo2, Save } from "lucide-react";
 import { toast } from 'react-toastify';
@@ -133,7 +133,7 @@ const WorkflowBuilder: React.FC = () => {
 
   return (
     <div className="flex w-full h-screen">
-      <AiNode />
+      {/* <AiNode /> */}
       <div className="flex-grow flex flex-col">
         {user && <WorkflowExecutionPanel />}
         <div

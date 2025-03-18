@@ -12,7 +12,7 @@ interface AIModelConfig {
   maxTokens?: number;
   temperature?: number;
 }
-
+// Here we want to add api key from workflowstore not getting from below hardly 
 const openaiModels: Record<string, AIModelConfig> = {
   'gpt-4o-mini': {
     apiKey: process.env.OPENAI_API_KEY || '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',
